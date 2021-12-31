@@ -1,12 +1,14 @@
 import express from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import Home from "./containers/Home";
+import Home from "../containers/Home";
 
 const content = renderToString(<Home />);
 
 const app = express();
 const port = 3000;
+
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send(`
@@ -19,7 +21,8 @@ app.get("/", (req, res) => {
       <title>Document</title>
     </head>
     <body>
-      ${content}
+      <div id="root">${content}</div>
+      <script src="/app.js"></script>
     </body>
     </html>
   `);
