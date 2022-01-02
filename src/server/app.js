@@ -1,7 +1,8 @@
 import express from "express";
-import { getStore } from "@/store";
+import proxy from "express-http-proxy";
 import { matchPath } from "react-router-dom";
 
+import { getStore } from "@/store";
 import routeMap from "@/routes";
 import { render } from "./utils";
 
@@ -9,6 +10,15 @@ const app = express();
 const port = 3000;
 
 app.use(express.static("public"));
+
+app.use(
+  "/api",
+  proxy("https://www.fastmock.site", {
+    proxyReqPathResolver(req) {
+      return `/mock/d8d2dada8fc14e28ae1796fa3fddc159/ssr/api${req.url}`;
+    },
+  })
+);
 
 app.get("*", (req, res) => {
   const store = getStore();
