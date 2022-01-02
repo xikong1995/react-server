@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Header from "@/components/Header";
 import { getHomeList } from "./store/actions";
 
 class Home extends React.Component {
@@ -14,7 +13,6 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <div style={{ color: "red" }}>Hello {this.props.name}</div>
         <button onClick={() => alert("hello world")}>点我</button>
         <ul>{this.getList()}</ul>

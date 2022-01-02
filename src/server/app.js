@@ -1,9 +1,9 @@
 import express from "express";
 import proxy from "express-http-proxy";
-import { matchPath } from "react-router-dom";
+import { matchRoutes } from "react-router-dom";
 
 import { getStore } from "@/store";
-import routeMap from "@/routes";
+import routes from "@/routes";
 import { render } from "./utils";
 
 const app = express();
@@ -22,17 +22,19 @@ app.use(
 
 app.get("*", (req, res) => {
   const store = getStore();
-  // TODO: 支持嵌套路由
+
   const promises = [];
-  routeMap.some((item) => {
-    const match = matchPath(item, req.url);
-    if (match && item.loadData) {
-      promises.push(item.loadData(store));
-    }
-    return match;
-  });
+  const matchedRoutes = matchRoutes(routes, req.url);
+  if (matchedRoutes) {
+    matchedRoutes.forEach(({ route }) => {
+      if (route.loadData) {
+        promises.push(route.loadData(store));
+      }
+    });
+  }
+
   Promise.all(promises).then(() => {
-    res.send(render(store, routeMap, req));
+    res.send(render(store, routes, req));
   });
 });
 

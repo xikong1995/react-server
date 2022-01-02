@@ -1,19 +1,14 @@
 import React from "react";
-import { renderToString } from "react-dom/server";
+import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
-export const render = (store, routeMap, req) => {
-  const content = renderToString(
+import { readerRoutes } from "@/routes";
+
+export const render = (store, routes, req) => {
+  const content = ReactDOMServer.renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.url}>
-        <Routes>
-          {routeMap.map((item) => (
-            <Route {...item} />
-          ))}
-        </Routes>
-      </StaticRouter>
+      <StaticRouter location={req.url}>{readerRoutes(routes)}</StaticRouter>
     </Provider>
   );
 
