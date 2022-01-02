@@ -1,3 +1,4 @@
+const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
@@ -29,5 +30,10 @@ module.exports = {
         extractComments: false,
       }),
     ],
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
 };
