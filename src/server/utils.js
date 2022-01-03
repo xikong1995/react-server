@@ -4,13 +4,20 @@ import { StaticRouter } from "react-router-dom/server";
 import { Provider } from "react-redux";
 
 import { readerRoutes } from "@/routes";
+import { StatusContext } from "@/context";
 
-export const render = (store, routes, req) => {
-  const content = ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.url}>{readerRoutes(routes)}</StaticRouter>
-    </Provider>
-  );
+export const render = (store, routes, req, context) => {
+  const App = () => {
+    return (
+      <StatusContext.Provider value={context}>
+        <Provider store={store}>
+          <StaticRouter location={req.url}>{readerRoutes(routes)}</StaticRouter>
+        </Provider>
+      </StatusContext.Provider>
+    );
+  };
+
+  const content = ReactDOMServer.renderToString(<App />);
 
   return `
     <!DOCTYPE html>

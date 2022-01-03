@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "@/containers/Home";
 import News from "@/containers/News";
+import NotFound from "@/containers/NotFound";
 import App from "@/App";
 
 export default [
@@ -23,6 +24,11 @@ export default [
         element: <News />,
         loadData: News.loadData,
         key: "news",
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+        key: "notFound",
       },
     ],
   },

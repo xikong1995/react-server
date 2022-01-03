@@ -28,12 +28,28 @@ app.get("*", (req, res) => {
   if (matchedRoutes) {
     matchedRoutes.forEach(({ route }) => {
       if (route.loadData) {
-        promises.push(route.loadData(store));
+        // 容错处理，即使某一个请求失败了，不会影响其他请求
+        const promise = new Promise((resolve) => {
+          route.loadData(store).then(
+            (res) => {
+              resolve(res);
+            },
+            (err) => {
+              resolve(err);
+            }
+          );
+        });
+        promises.push(promise);
       }
     });
   }
   Promise.all(promises).then(() => {
-    res.send(render(store, routes, req));
+    const context = {};
+    const html = render(store, routes, req, context);
+    if (context.notFound) {
+      res.status(404);
+    }
+    res.send(html);
   });
 });
 

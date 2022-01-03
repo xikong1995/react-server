@@ -1,1 +1,1 @@
-export const DOMAIN = "http://192.168.2.13:8080";
+export const DOMAIN = "http://127.0.0.1:8080";

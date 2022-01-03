@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { actions } from "./store";
@@ -13,12 +13,12 @@ class Header extends React.Component {
     return (
       <ul>
         <li>
-          <NavLink to="/">首页</NavLink>
+          <Link to="/">首页</Link>
         </li>
         {isLogin ? (
           <Fragment>
             <li>
-              <NavLink to="/news">新闻</NavLink>
+              <Link to="/news">新闻</Link>
             </li>
             <li onClick={handleLogout}>退出</li>
           </Fragment>
