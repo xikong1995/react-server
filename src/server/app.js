@@ -4,6 +4,7 @@ import { matchRoutes } from "react-router-dom";
 
 import { getStore } from "@/store";
 import routes from "@/routes";
+import { DOMAIN } from "@/constants";
 import { render } from "./utils";
 
 const app = express();
@@ -13,16 +14,15 @@ app.use(express.static("public"));
 
 app.use(
   "/api",
-  proxy("https://www.fastmock.site", {
+  proxy(DOMAIN, {
     proxyReqPathResolver(req) {
-      return `/mock/d8d2dada8fc14e28ae1796fa3fddc159/ssr/api${req.url}`;
+      return `/api${req.url}`;
     },
   })
 );
 
 app.get("*", (req, res) => {
-  const store = getStore();
-
+  const store = getStore(req);
   const promises = [];
   const matchedRoutes = matchRoutes(routes, req.url);
   if (matchedRoutes) {
@@ -32,7 +32,6 @@ app.get("*", (req, res) => {
       }
     });
   }
-
   Promise.all(promises).then(() => {
     res.send(render(store, routes, req));
   });

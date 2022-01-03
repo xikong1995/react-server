@@ -2,14 +2,14 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "@/containers/Home";
-import About from "@/containers/About";
-import AboutMe from "@/containers/About/AboutMe";
+import News from "@/containers/News";
 import App from "@/App";
 
 export default [
   {
     path: "/",
     element: <App />,
+    loadData: App.loadData,
     key: "app",
     children: [
       {
@@ -19,16 +19,10 @@ export default [
         key: "home",
       },
       {
-        path: "about",
-        element: <About />,
-        key: "about",
-        children: [
-          {
-            path: "me",
-            element: <AboutMe />,
-            key: "aboutMe",
-          },
-        ],
+        path: "news",
+        element: <News />,
+        loadData: News.loadData,
+        key: "news",
       },
     ],
   },

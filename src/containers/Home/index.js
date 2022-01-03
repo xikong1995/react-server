@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getHomeList } from "./store/actions";
+import { actions } from "./store";
 
 class Home extends React.Component {
   getList() {
@@ -13,8 +13,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <div style={{ color: "red" }}>Hello {this.props.name}</div>
-        <button onClick={() => alert("hello world")}>点我</button>
+        <h2>这是首页</h2>
         <ul>{this.getList()}</ul>
       </div>
     );
@@ -29,17 +28,17 @@ class Home extends React.Component {
 }
 
 Home.loadData = (store) => {
-  return store.dispatch(getHomeList());
+  return store.dispatch(actions.getHomeList());
 };
 
 const mapStateToProps = (state) => ({
   name: state.home.name,
-  list: state.home.newList,
+  list: state.home.list,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getHomeList() {
-    dispatch(getHomeList());
+    dispatch(actions.getHomeList());
   },
 });
 

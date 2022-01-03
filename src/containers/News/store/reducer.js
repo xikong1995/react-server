@@ -1,4 +1,4 @@
-import { CHANGE_HOME_LIST } from "./constants";
+import { CHANGE_NEWS_LIST } from "./constants";
 
 const defaultState = {
   list: [],
@@ -6,7 +6,7 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case CHANGE_HOME_LIST:
+    case CHANGE_NEWS_LIST:
       return {
         ...defaultState,
         list: action.list,
