@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import withStyles from "isomorphic-style-loader/withStyles";
 
 import { actions } from "./store";
-
-// import styles from "./index.css";
+import styles from "./index.css";
 
 class Header extends React.Component {
   render() {
@@ -43,4 +43,7 @@ const mapStateToDispatch = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(Header);
+export default connect(
+  mapStateToProps,
+  mapStateToDispatch
+)(withStyles(styles)(Header));

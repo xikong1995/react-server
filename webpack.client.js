@@ -12,26 +12,6 @@ module.exports = merge(config, {
     path: path.resolve(__dirname, "public"),
     clean: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: {
-                localIdentName: "[name]__[local]--[hash:base64:5]",
-              },
-              esModule: false,
-            },
-          },
-        ],
-      },
-    ],
-  },
   plugins: [
     new CopyPlugin({
       patterns: [{ from: "static" }],

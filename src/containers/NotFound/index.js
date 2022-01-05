@@ -1,6 +1,8 @@
 import React from "react";
+import withStyles from "isomorphic-style-loader/withStyles";
 
 import { StatusContext } from "@/context";
+import styles from "./index.css";
 
 class NotFound extends React.Component {
   static contextType = StatusContext;
@@ -8,8 +10,8 @@ class NotFound extends React.Component {
   render() {
     this.context && (this.context.notFound = true);
 
-    return <div>404, Page not found!</div>;
+    return <div className={styles.text}>404, Page not found!</div>;
   }
 }
 
-export default NotFound;
+export default withStyles(styles)(NotFound);

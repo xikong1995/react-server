@@ -14,24 +14,4 @@ module.exports = merge(config, {
     clean: true,
   },
   externals: [nodeExternals()],
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          "isomorphic-style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: {
-                localIdentName: "[name]__[local]--[hash:base64:5]",
-              },
-              esModule: false,
-            },
-          },
-        ],
-      },
-    ],
-  },
 });

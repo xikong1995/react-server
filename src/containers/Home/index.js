@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import withStyles from "isomorphic-style-loader/withStyles";
 
 import { actions } from "./store";
+import styles from "./index.css";
 
 class Home extends React.Component {
   getList() {
@@ -13,7 +15,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h2>这是首页</h2>
+        <h2 className={styles["header-color"]}>这是首页</h2>
         <ul>{this.getList()}</ul>
       </div>
     );
@@ -27,10 +29,6 @@ class Home extends React.Component {
   }
 }
 
-Home.loadData = (store) => {
-  return store.dispatch(actions.getHomeList());
-};
-
 const mapStateToProps = (state) => ({
   name: state.home.name,
   list: state.home.list,
@@ -42,4 +40,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+const ExportHome = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Home));
+
+ExportHome.loadData = (store) => {
+  return store.dispatch(actions.getHomeList());
+};
+
+export default ExportHome;

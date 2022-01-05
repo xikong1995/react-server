@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
+import withStyles from "isomorphic-style-loader/withStyles";
 
 import { actions } from "./store";
+import styles from "./index.css";
 
 class News extends React.Component {
   getList() {
@@ -32,10 +34,6 @@ class News extends React.Component {
   }
 }
 
-News.loadData = (store) => {
-  return store.dispatch(actions.getNewsList());
-};
-
 const mapStateToProps = (state) => ({
   list: state.news.list,
   isLogin: state.header.isLogin,
@@ -47,4 +45,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(News);
+const ExportNews = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(News));
+
+ExportNews.loadData = (store) => {
+  return store.dispatch(actions.getNewsList());
+};
+
+export default ExportNews;
