@@ -1,4 +1,34 @@
 .container {
   display: flex;
+  align-items: center;
+  height: 60px;
+  margin: 15px 30px;
   font-size: 20px;
+  border: 1px solid #eee;
+}
+
+.item {
+  margin-right: 20px;
+  color: #666;
+}
+
+.item.active {
+  color: #fc5531;
+}
+
+.item a {
+  color: #666;
+}
+
+.item.active a {
+  color: #fc5531;
+}
+
+.item:hover {
+  color: #fc5531;
+  cursor: pointer;
+}
+
+.item:hover a {
+  color: #fc5531;
 }

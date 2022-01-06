@@ -1,16 +1,20 @@
 import React from "react";
 import withStyles from "isomorphic-style-loader/withStyles";
 
-import { StatusContext } from "@/context";
+import { ServerContext } from "@/context";
 import styles from "./index.css";
 
 class NotFound extends React.Component {
-  static contextType = StatusContext;
+  static contextType = ServerContext;
 
   render() {
     this.context && (this.context.notFound = true);
 
-    return <div className={styles.text}>404, Page not found!</div>;
+    return (
+      <div className={styles.container}>
+        <p className={styles.text}>404, Page not found!</p>
+      </div>
+    );
   }
 }
 

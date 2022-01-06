@@ -1,0 +1,10 @@
+.container {
+  margin: 20px 30px;
+}
+
+.list-wrapper {
+  padding: 0;
+  line-height: 30px;
+  color: #555;
+  font-size: 14px;
+}

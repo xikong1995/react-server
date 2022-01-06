@@ -1,3 +1,3 @@
 import React from "react";
 
-export const StatusContext = React.createContext();
+export const ServerContext = React.createContext();

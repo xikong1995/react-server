@@ -17,9 +17,9 @@ class News extends React.Component {
     const { isLogin } = this.props;
 
     return isLogin ? (
-      <div>
-        <h2>这是新闻页</h2>
-        <ul>{this.getList()}</ul>
+      <div className={styles.container}>
+        <h2 style={{ fontSize: "20px", color: "#333" }}>这是新闻页</h2>
+        <ul className={styles["list-wrapper"]}>{this.getList()}</ul>
       </div>
     ) : (
       <Navigate to="/" replace={true} />

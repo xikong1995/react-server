@@ -1,4 +1,4 @@
-import { CHANGE_LOGIN } from "./constants";
+import { CHANGE_LOGIN, CHANGE_ACTIVE_TAB } from "./constants";
 
 const changeLogin = (isLogin) => ({
   type: CHANGE_LOGIN,
@@ -29,3 +29,8 @@ export const logout = () => {
     });
   };
 };
+
+export const changeActiveTab = (activeTab) => ({
+  type: CHANGE_ACTIVE_TAB,
+  activeTab,
+});

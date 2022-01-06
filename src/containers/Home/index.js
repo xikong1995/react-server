@@ -14,9 +14,9 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2 className={styles["header-color"]}>这是首页</h2>
-        <ul>{this.getList()}</ul>
+      <div className={styles.container}>
+        <h2 style={{ fontSize: "20px", color: "#333" }}>这是首页</h2>
+        <ul className={styles["list-wrapper"]}>{this.getList()}</ul>
       </div>
     );
   }

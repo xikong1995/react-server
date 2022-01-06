@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import StyleContext from "isomorphic-style-loader/StyleContext";
 
 import { readerRoutes } from "@/routes";
-import { StatusContext } from "@/context";
+import { ServerContext } from "@/context";
 
 export const render = (store, routes, req, context) => {
   const css = new Set();
@@ -15,13 +15,13 @@ export const render = (store, routes, req, context) => {
   const App = () => {
     return (
       <StyleContext.Provider value={{ insertCss }}>
-        <StatusContext.Provider value={context}>
+        <ServerContext.Provider value={context}>
           <Provider store={store}>
             <StaticRouter location={req.url}>
               {readerRoutes(routes)}
             </StaticRouter>
           </Provider>
-        </StatusContext.Provider>
+        </ServerContext.Provider>
       </StyleContext.Provider>
     );
   };
@@ -36,6 +36,7 @@ export const render = (store, routes, req, context) => {
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>React服务端渲染</title>
+      <link rel="stylesheet" type="text/css" href="/normalize.css">
       <style>${[...css].join("")}</style>
     </head>
     <body>

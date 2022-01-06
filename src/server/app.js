@@ -44,7 +44,10 @@ app.get("*", (req, res) => {
     });
   }
   Promise.all(promises).then(() => {
-    const context = {};
+    const context = {
+      notFound: false,
+      path: req.path,
+    };
     const html = render(store, routes, req, context);
     if (context.notFound) {
       res.status(404);
